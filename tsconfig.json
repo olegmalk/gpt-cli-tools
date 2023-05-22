@@ -20,6 +20,9 @@
       "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true,
       "skipLibCheck": true,
+      "moduleResolution": "Node",
+      "target": "ESNext",
+      "module": "ESNext",
       "types": ["node", "jest"],
     },
     "include": ["src/**/*"]

@@ -4,7 +4,7 @@ import commandLineArgs from 'command-line-args';
 
 import { twirlTimer, clearTwirlTimer } from './utils';
 import { validateCommand } from './validate';
-import { documentCode, convertToTypeScript, refactorCode, testCode } from './index';
+import { documentCode, convertToTypeScript, refactorCode, testCode, splitCode } from './index';
 
 async function main(): Promise<void> {
     const optionDefinitions = [
@@ -14,6 +14,7 @@ async function main(): Promise<void> {
         { name: 'doc', alias: 'd', type: Boolean },
         { name: 'to-ts', type: Boolean },
         { name: 'refactor', alias: 'r', type: Boolean },
+        { name: 'split', alias: 's', type: Boolean },
         { name: 'test', alias: 't', type: Boolean },
         { name: 'file', alias: 'f', type: String },
     ];
@@ -25,7 +26,7 @@ async function main(): Promise<void> {
         return;
     }
 
-    const [parsedArguments, lines] = validatedArguments;
+    const [parsedArguments, lines, fullPath] = validatedArguments;
     const code = lines.join('\n');
 
     if (parsedArguments.writeDocumentation) {
@@ -37,8 +38,11 @@ async function main(): Promise<void> {
     } else if (parsedArguments.refactor) {
         await refactorCode(parsedArguments, code);
         return;
+    } else if (parsedArguments.split) {
+        await splitCode(parsedArguments, code, fullPath);
+        return;
     } else if (parsedArguments.test) {
-        await testCode(parsedArguments, code);
+        await testCode(parsedArguments, code, fullPath);
         return;
     }
 }

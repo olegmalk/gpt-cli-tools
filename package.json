@@ -1,13 +1,14 @@
 {
   "name": "type-scriptor",
   "version": "1.1.0",
+  "type": "module",
   "description": "type-scriptor is an NPM package CLI tool that uses ChatGPT to improve your JavaScript and TypeScript code.",
   "license": "MIT",
   "repository": "https://github.com/alexanderjdean/type-scriptor.git",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsmodule build && chmod +x dist/cli.js",
     "test": "jest"
   },
   "bin": {
@@ -32,9 +33,15 @@
     "vitest": "^0.29.8"
   },
   "dependencies": {
+    "@tsmodule/tsmodule": "^44.5.0",
     "chalk": "^4",
     "command-line-args": "^5.2.1",
     "dotenv": "^16.0.3",
-    "recast": "^0.22.0"
+    "gpt-tokenizer": "^1.0.5",
+    "openai": "^3.2.1",
+    "openai-streams": "^5.5.0",
+    "recast": "^0.22.0",
+    "yarn": "^1.22.19",
+    "yield-stream": "^3.0.0"
   }
 }

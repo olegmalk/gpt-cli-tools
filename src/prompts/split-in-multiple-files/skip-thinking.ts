@@ -1,0 +1,1 @@
+export const SKIP_THINKING_MESSAGE = "!!!Do not output thinking, instead replace {replace_with_thinking} with SKIPPED. Only output the solution, but follow the format!!!";

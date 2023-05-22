@@ -50,21 +50,3 @@ Respond ONLY with the ${language} code file with changes requested, and nothing 
     `;
     return prompt
 }
-
-export function createTestPrompt(code: string, isTypeScript: boolean, file: string): string {
-    const language = isTypeScript ? "TypeScript" : "JavaScript";
-
-
-    const prompt = `
-I have the following ${language} code file named ${file}:
-
-----------------------------------------
-${code}
-----------------------------------------
-
-I would like you to write unit tests for this file using Jest. Write unit tests that test the underlying code logic, consider edge cases, and cover all areas of the code.
-
-Respond ONLY with the Jest unit tests, and nothing else. Do not respond with any other text.
-    `;
-    return prompt
-}

@@ -24,6 +24,7 @@ export function createArgumentsObject(rawArguments: any): Array<any> {
         writeDocumentation: (!rawArguments.doc ? false : true),
         convertToTypeScript: (!rawArguments['to-ts'] ? false : true),
         refactor: (!rawArguments.refactor ? false : true),
+        split: (!rawArguments.split ? false : true),
         test: (!rawArguments.test ? false : true),
         filePath: (!rawArguments.file ? "" : rawArguments.file),
         apiKey: ""
@@ -39,7 +40,7 @@ export function createArgumentsObject(rawArguments: any): Array<any> {
     apiKey = apiKey || loadApiKey();
     parsedArguments["apiKey"] = apiKey;
 
-    const actions = [parsedArguments.writeDocumentation, parsedArguments.convertToTypeScript, parsedArguments.refactor, parsedArguments.test].filter(Boolean).length;
+    const actions = [parsedArguments.writeDocumentation, parsedArguments.convertToTypeScript, parsedArguments.refactor, parsedArguments.split, parsedArguments.test].filter(Boolean).length;
     return [parsedArguments, actions];
 }
 
@@ -110,12 +111,12 @@ export function validateCommand(rawArguments: any): Array<any> {
     const ext = path.extname(fullPath);
 
     if (parsedArguments.filePath) {
-        if (ext !== '.js' && ext !== '.ts') {
-            throw new Error("Error: Invalid command. Please provide a JavaScript or TypeScript file.");
-        } else if (ext === '.ts') {
+        if (ext.includes('.ts')) {
             parsedArguments["isTypeScript"] = true;
-        } else {
+        } else if (ext.includes('.js')) {
             parsedArguments["isTypeScript"] = false;
+        } else {
+            throw new Error("Error: Invalid command. Please provide a JavaScript or TypeScript file.");
         }
     }
 
@@ -126,5 +127,5 @@ export function validateCommand(rawArguments: any): Array<any> {
         throw (`Error: The provided file has more than ${LINES_LIMIT} lines of code. Please provide a smaller file to process.`);
     }
 
-    return [parsedArguments, lines]
+    return [parsedArguments, lines, fullPath]
 }
