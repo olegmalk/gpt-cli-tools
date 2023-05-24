@@ -37,6 +37,8 @@ Requirements:
 - 4. File outputs should be plain test with no formatting or code blocks
 - 5. Make sure that the code you output has same behavior as original file code
 - 6. Make sure that main file still has some responsibility after splitting down, is not just a wrapper for other file
+- 7. Make sure that arguments of the functions you create are as lean as possible.
+- 8. Make sure that props of the components you create are as lean as possible.
 
 Tasks:
 - Split original file into smaller files given absolute paths and export names of file to create.

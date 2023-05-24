@@ -35,7 +35,7 @@ Add import for the file under test.
 - R6. Use mockReturnValue, to set the return values of the mocked imports, this should be done inside beforeEach inside describe
 - R7. Do not include jest.clearAllMocks();
 - R8. Do not mock any types or interfaces
-- R9. Test file name should be same as original file name but with .test. suffix before extension.
+- R9. Test file name should be same as original file name but with .spec. suffix before extension.
 - R10. Do not mock react-native
 - R11. All the data mocks you make should have type any
 
